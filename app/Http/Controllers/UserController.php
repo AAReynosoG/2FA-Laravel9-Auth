@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rules\Password;
 
 /**
  * Controller for handling user registration and email verification.
@@ -35,7 +36,7 @@ class UserController extends Controller
     {
         $rules = [
             'email' => 'required|email|unique:users',
-            'password' => 'required|min:8',
+            'password' => ['required', Password::defaults()],
             'password_confirmation' => 'required|same:password',
             'g-recaptcha-response' => 'required|captcha'
         ];
