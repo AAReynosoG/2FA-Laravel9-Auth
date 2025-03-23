@@ -207,15 +207,10 @@ class AuthController extends Controller
         $google2fa = new Google2FA();
         $isValid = $google2fa->verifyKey($google2fa_secret, $request->totp);
 
-        // If TOTP is invalid, return with an error
-        if (!$isValid) {
-            return back()->withErrors([
-                'error' => 'Invalid credentials. Please try again.',
-            ]);
-        }
 
         // Validate user credentials
-        if (!Auth::validate(['email' => $email, 'password' => $request->password])) {
+        if (!Auth::validate(['email' => $email, 'password' => $request->password]) || !$isValid) {
+            session(['internal_redirect' => true]);
             return back()->withErrors([
                 'error' => 'Invalid credentials. Please try again.',
             ]);

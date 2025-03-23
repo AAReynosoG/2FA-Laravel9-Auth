@@ -2,6 +2,11 @@
 @section('title', 'McGrubberS Burger - Into the Sauce')
 
 @section('main_content')
+    <p class="text-white text-sm mt-6">
+        Email Resend <br/>
+        Make sure to check your spam folder if you don't see the email in your inbox.
+    </p>
+
     <form onsubmit="disableButton()" class="flex flex-col" action="{{ route('user.resend')  }}" method="POST">
         @csrf
 
@@ -28,5 +33,7 @@
                     hover:cursor-pointer hover:bg-[#3D4FA9] focus:outline-none focus:ring-2 focus:ring-[#4D6BFE]">
             Resend
         </button>
+
+        <a href="/sign_in" class="text-sm text-[#4D6BFE] mt-4 hover:underline hover:cursor-pointer">Sign In</a>
     </form>
 @endsection
