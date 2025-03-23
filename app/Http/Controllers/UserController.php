@@ -59,12 +59,18 @@ class UserController extends Controller
             ['id' => $user->id] // Necessary data for verification
         );
 
-        // Send the verification email
-        Mail::to($user->email)->send(new VerifyEmail($verificationUrl));
+        try {
+            // Send the verification email
+            Mail::to($user->email)->send(new VerifyEmail($verificationUrl));
 
-        // Update the user's verification link sent timestamp
-        $user->verification_link_sent_at = now();
-        $user->save();
+            // Update the user's verification link sent timestamp
+            $user->verification_link_sent_at = now();
+            $user->save();
+
+        } catch (\Exception $e) {
+            Log::error('Error sending verification email: ' . $e->getMessage());
+            return redirect()->back()->with('error_message', 'Error sending verification email');
+        }
 
         // Set an internal redirect session variable
         session(['internal_redirect' => true]);

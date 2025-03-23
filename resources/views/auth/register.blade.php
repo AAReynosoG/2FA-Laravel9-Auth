@@ -32,6 +32,7 @@
             <!-- SVG Icon -->
             <x-password_input_svg />
         </div>
+        <p class="text-xs mt-2">Minimum 8 characters, one uppercase, one lowercase, one number, and one special character (@$!%*?&#)</p>
         <x-error_message field="password" />
 
 
