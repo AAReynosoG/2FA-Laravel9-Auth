@@ -6,7 +6,7 @@
         Make sure you use a valid email, you will be notified with a confirmation email.
     </p>
 
-    <form onsubmit="disableButton('submit_button')" class="flex flex-col" id="sign_up_form" action="{{ route('user.store') }}" method="POST">
+    <form onsubmit="disableButton(event)" class="flex flex-col" id="sign_up_form" action="{{ route('user.store') }}" method="POST">
         @csrf
 
         <div class="relative mt-2">

@@ -7,7 +7,7 @@
         Make sure to check your spam folder if you don't see the email in your inbox.
     </p>
 
-    <form onsubmit="disableButton()" class="flex flex-col" action="{{ route('user.resend')  }}" method="POST">
+    <form onsubmit="disableButton(event)" class="flex flex-col" action="{{ route('user.resend')  }}" method="POST">
         @csrf
 
         <div class="relative mt-2">

@@ -13,7 +13,7 @@
         </div>
     @endif
 
-    <form onsubmit="disableButton('submit_button')" id="totp_form" class="flex flex-col" action="{{ route('user.authenticate')  }}" method="POST">
+    <form onsubmit="disableButton(event)" id="totp_form" class="flex flex-col" action="{{ route('user.authenticate')  }}" method="POST">
         @csrf
 
         <div class="relative mt-2">

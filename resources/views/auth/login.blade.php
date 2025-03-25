@@ -2,7 +2,7 @@
 @section('title', 'McGrubberS Burger - Into the Sauce')
 
 @section('main_content')
-    <form onsubmit="disableButton('submit_button')" class="flex flex-col" action="{{ route('user.validate')  }}" method="POST">
+    <form onsubmit="disableButton(event)" class="flex flex-col" action="{{ route('user.validate')  }}" method="POST">
         @csrf
 
         <div class="relative mt-2">

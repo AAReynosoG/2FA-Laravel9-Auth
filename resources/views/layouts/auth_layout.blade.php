@@ -19,7 +19,7 @@
     <main>
         <div class="w-full max-w-md mt-10 rounded-2xl p-6 text-white">
 
-            <h1 class="text-2xl font-bold mb-4 mt-10 text-center text-[#4D6BFE]">McGrubber's Burger</h1>
+            <h1 class="text-2xl font-bold mb-4 mt-10 text-center text-[#4D6BFE]">McGrubber's Burgers</h1>
 
             @if(session('error_message'))
                 <div class="border border-red-500 bg-red-500/15 text-red-500 p-4 rounded-lg">
@@ -42,22 +42,40 @@
         /**
          * Disables the submit button, changes its text to "Processing...",
          * and updates the cursor style to "not-allowed".
-         * @param {string} submitButtonId - The ID of the submit button element.
+         * @param event - The event object.
          */
-        function disableButton(submitButtonId) {
-            const submitButton = document.getElementById(submitButtonId);
+        function disableButton(event) {
+            const submitButton = document.getElementById('submit_button');
+            const recaptchaResponse = grecaptcha.getResponse();
 
+            if (recaptchaResponse.length === 0) {
+                alert('Please complete the reCaptcha challenge');
+                event.preventDefault();
+                return;
+            }
 
             submitButton.disabled = true;
             submitButton.innerText = 'Processing...';
             submitButton.style.cursor = 'not-allowed';
 
-            setTimeout(() => {
+            /*setTimeout(() => {
                 submitButton.disabled = false;
                 submitButton.innerText = 'Submit';
                 submitButton.style.cursor = 'pointer';
-            }, 5000);
+            }, 5000);*/
         }
+
+
+        /**
+        *  This function is called when the page is loaded.
+        *  It enables the submit button, changes its text to "Submit",
+        * */
+        document.addEventListener('DOMContentLoaded', () => {
+            const submitButton = document.getElementById('submit_button');
+            submitButton.disabled = false;
+            submitButton.style.cursor = 'pointer';
+            submitButton.textContent = 'Submit';
+        });
 
 
         /**
